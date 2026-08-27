@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/reveal-v1.json",
+  "title": "Frontier Atlas annotation reveal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "canonicalization_version", "commitment_id", "commitment_record_sha256", "assignment_id", "contributor_id", "revealed_at", "salt", "annotation"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "canonicalization_version": {"const": "atlas-canonical-json-v1"},
+    "commitment_id": {"type": "string"},
+    "commitment_record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "assignment_id": {"type": "string"},
+    "contributor_id": {"type": "string"},
+    "revealed_at": {"type": "string", "pattern": "Z$"},
+    "salt": {"type": "string", "minLength": 32, "maxLength": 256},
+    "annotation": {"$ref": "annotation.schema.json"}
+  }
+}

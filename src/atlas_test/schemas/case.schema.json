@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/case-v1.json",
+  "title": "Frontier Atlas blind case v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "assignment_id", "case_ref", "language", "profile", "claim", "source_text", "quoted_evidence", "quote_start", "quote_end", "context_before", "context_after", "source_snapshot_id", "source_span_id", "bounded_corpus_snapshot_ids"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "assignment_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "case_ref": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "language": {"enum": ["en", "zh-Hant"]},
+    "profile": {"enum": ["semantic_calibration", "real_source_calibration", "qualification"]},
+    "claim": {"type": "string", "minLength": 1, "maxLength": 10000},
+    "source_text": {"type": "string", "minLength": 1, "maxLength": 200000},
+    "quoted_evidence": {"type": "string", "minLength": 1, "maxLength": 20000},
+    "quote_start": {"type": "integer", "minimum": 0},
+    "quote_end": {"type": "integer", "minimum": 1},
+    "context_before": {"type": "string", "maxLength": 20000},
+    "context_after": {"type": "string", "maxLength": 20000},
+    "source_snapshot_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "source_span_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "bounded_corpus_snapshot_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"}
+    }
+  }
+}

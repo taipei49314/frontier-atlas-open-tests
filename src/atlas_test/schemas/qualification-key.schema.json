@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/qualification-key-v1.json",
+  "title": "Frontier Atlas private qualification key manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "qualification_id", "answer_count", "answers_file", "answers_sha256", "policy"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "qualification_id": {"type": "string"},
+    "answer_count": {"type": "integer", "minimum": 1},
+    "answers_file": {"type": "string"},
+    "answers_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_verdict_basis_points", "min_unsafe_basis_points", "min_violation_basis_points", "critical_must_all_pass"],
+      "properties": {
+        "min_verdict_basis_points": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "min_unsafe_basis_points": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "min_violation_basis_points": {"type": "integer", "minimum": 0, "maximum": 10000},
+        "critical_must_all_pass": {"type": "boolean"}
+      }
+    }
+  }
+}

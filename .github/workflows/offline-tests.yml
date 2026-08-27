@@ -1,0 +1,30 @@
+name: offline-tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile
+        env:
+          PYTHONPATH: src
+        run: python -m compileall -q src tests
+      - name: Unit tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v
+      - name: Offline doctor
+        env:
+          PYTHONPATH: src
+        run: python -m atlas_test --json doctor

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/packet-v1.json",
+  "title": "Frontier Atlas blind packet v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "packet_id", "created_at", "case_count", "cases_file", "cases_sha256", "source_count", "sources_file", "sources_sha256", "visibility", "authority"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "packet_id": {"type": "string"},
+    "created_at": {"type": "string", "pattern": "Z$"},
+    "case_count": {"type": "integer", "minimum": 1},
+    "cases_file": {"type": "string"},
+    "cases_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_count": {"type": "integer", "minimum": 0},
+    "sources_file": {"type": ["string", "null"]},
+    "sources_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "visibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["labels_included", "model_outputs_included", "attack_metadata_included", "severity_included", "pair_ids_included", "assignment_map_private"],
+      "properties": {
+        "labels_included": {"const": false},
+        "model_outputs_included": {"const": false},
+        "attack_metadata_included": {"const": false},
+        "severity_included": {"const": false},
+        "pair_ids_included": {"const": false},
+        "assignment_map_private": {"const": true}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purpose", "promotion_eligible", "gold_authority", "blindness"],
+      "properties": {
+        "purpose": {"enum": ["guideline_calibration", "qualification", "real_source_calibration"]},
+        "promotion_eligible": {"const": false},
+        "gold_authority": {"const": false},
+        "blindness": {"enum": ["content_blinded_public_source", "strict_unpublished"]}
+      }
+    }
+  }
+}

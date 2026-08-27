@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/commitment-v1.json",
+  "title": "Frontier Atlas annotation commitment v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "canonicalization_version", "commitment_id", "assignment_id", "contributor_id", "committed_at", "commitment_sha256"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "canonicalization_version": {"const": "atlas-canonical-json-v1"},
+    "commitment_id": {"type": "string"},
+    "assignment_id": {"type": "string"},
+    "contributor_id": {"type": "string"},
+    "committed_at": {"type": "string", "pattern": "Z$"},
+    "commitment_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

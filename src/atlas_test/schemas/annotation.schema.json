@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frontier-atlas.invalid/schemas/annotation-v1.json",
+  "title": "Frontier Atlas human annotation v1",
+  "$defs": {
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "snippet", "occurrence"],
+      "properties": {
+        "field": {"enum": ["claim", "quoted_evidence", "context_before", "context_after"]},
+        "snippet": {"type": "string", "minLength": 1, "maxLength": 240},
+        "occurrence": {"type": "integer", "minimum": 0, "maximum": 10000}
+      }
+    },
+    "corpus_anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_id", "start", "end", "snippet"],
+      "properties": {
+        "snapshot_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+        "start": {"type": "integer", "minimum": 0},
+        "end": {"type": "integer", "minimum": 1},
+        "snippet": {"type": "string", "minLength": 1, "maxLength": 20000}
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "relation", "conflict_basis", "claim_anchors", "evidence_anchors"],
+      "properties": {
+        "dimension": {"enum": ["subject", "predicate", "object", "scope", "quantity", "time", "condition", "modality", "attribution", "causality", "polarity"]},
+        "relation": {"enum": ["aligned", "claim_weaker", "claim_stronger", "conflicts", "not_expressed", "ambiguous", "not_applicable"]},
+        "conflict_basis": {"type": ["string", "null"], "enum": ["explicit_negation", "incompatible_value", "explicit_rejection", "explicit_incompatible_attribution", "explicit_incompatible_condition", null]},
+        "claim_anchors": {"type": "array", "items": {"$ref": "#/$defs/anchor"}},
+        "evidence_anchors": {"type": "array", "items": {"$ref": "#/$defs/anchor"}}
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "protocol_version", "assignment_id", "case_sha256", "contributor_id", "completed_at", "citation_support", "source_assurance", "counterevidence", "overall", "notes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "protocol_version": {"const": "frontier-atlas-open-test-v1"},
+    "assignment_id": {"type": "string"},
+    "case_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "contributor_id": {"type": "string"},
+    "completed_at": {"type": "string", "pattern": "Z$"},
+    "citation_support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "unsafe_to_clear", "violations", "assessments"],
+      "properties": {
+        "verdict": {"enum": ["entails", "partial_support", "contradicts", "insufficient_context", "ambiguous", "abstain"]},
+        "unsafe_to_clear": {"type": "boolean"},
+        "violations": {"type": "array", "uniqueItems": true, "items": {"enum": ["citation_mismatch", "source_credibility_unverified", "counterevidence_omitted", "semantic_shift", "attribution_error", "unsupported_inference", "direction_mismatch"]}},
+        "assessments": {"type": "array", "minItems": 11, "maxItems": 11, "items": {"$ref": "#/$defs/assessment"}}
+      }
+    },
+    "source_assurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenance_status", "credibility_status", "corroboration_status"],
+      "properties": {
+        "provenance_status": {"enum": ["not_assessed", "verified", "unverified", "conflicting"]},
+        "credibility_status": {"enum": ["not_assessed", "credible", "mixed", "weak", "unknown"]},
+        "corroboration_status": {"enum": ["not_assessed", "corroborated", "uncorroborated", "conflicting"]}
+      }
+    },
+    "counterevidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "scan_status", "scanned_snapshot_ids", "conflicts_found", "conflict_anchors"],
+      "properties": {
+        "scope": {"enum": ["exact_citation_only", "bounded_corpus"]},
+        "scan_status": {"enum": ["not_requested", "complete", "partial", "unavailable"]},
+        "scanned_snapshot_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"}},
+        "conflicts_found": {"type": ["boolean", "null"]},
+        "conflict_anchors": {"type": "array", "items": {"$ref": "#/$defs/corpus_anchor"}}
+      }
+    },
+    "overall": {"enum": ["no_objection", "human_review", "unavailable"]},
+    "notes": {"type": "string", "maxLength": 4000}
+  }
+}
