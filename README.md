@@ -92,5 +92,8 @@ partial protocol result.
 - [`p4-semantic-pilot-v1`](packets/p4-semantic-pilot-v1/README.md): 64-case
   process-blind semantic calibration packet; human annotation has not started
   and the packet has no gold or promotion authority.
+- [`p4-qualification-candidate-v1`](packets/p4-qualification-candidate-v1/README.md):
+  inactive 12-case bilingual qualification candidate; private key review is
+  pending and no score currently grants contributor status.
 
 Research baseline provenance: `frontier-atlas@0db3118`.

@@ -1,0 +1,26 @@
+{
+  "authority": {
+    "blindness": "content_blinded_public_source",
+    "gold_authority": false,
+    "promotion_eligible": false,
+    "purpose": "qualification"
+  },
+  "case_count": 12,
+  "cases_file": "cases.jsonl",
+  "cases_sha256": "5b71c7fbea3bbf17b27f8fc12767c836b8f93308fde9b02adbfc02433899b487",
+  "created_at": "2026-08-27T11:00:00Z",
+  "packet_id": "p4-qualification-candidate-v1",
+  "protocol_version": "frontier-atlas-open-test-v1",
+  "schema_version": 1,
+  "source_count": 0,
+  "sources_file": null,
+  "sources_sha256": null,
+  "visibility": {
+    "assignment_map_private": true,
+    "attack_metadata_included": false,
+    "labels_included": false,
+    "model_outputs_included": false,
+    "pair_ids_included": false,
+    "severity_included": false
+  }
+}
