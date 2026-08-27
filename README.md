@@ -87,4 +87,10 @@ partial protocol result.
 - [Contributor workflow](docs/CONTRIBUTOR_WORKFLOW.md)
 - [Public/private boundary](PUBLIC_BOUNDARY.md)
 
+## Local calibration packets
+
+- [`p4-semantic-pilot-v1`](packets/p4-semantic-pilot-v1/README.md): 64-case
+  process-blind semantic calibration packet; human annotation has not started
+  and the packet has no gold or promotion authority.
+
 Research baseline provenance: `frontier-atlas@0db3118`.
