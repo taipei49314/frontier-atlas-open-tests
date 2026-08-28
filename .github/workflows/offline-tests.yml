@@ -3,6 +3,7 @@ name: offline-tests
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,3 +29,9 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m atlas_test --json doctor
+      - name: Bundled packet verification
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m atlas_test --json packet validate --packet packets/p4-semantic-pilot-v1/packet.json
+          python -m atlas_test --json packet validate --packet packets/p4-qualification-candidate-v1/packet.json

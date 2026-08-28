@@ -1,15 +1,28 @@
 # Frontier Atlas open test surface
 
-Offline, publishable protocol verifier candidate for Frontier Atlas bounded
-claim–citation audits. It validates blind case packets, immutable source
+Public, offline protocol verifier and blind test surface for Frontier Atlas
+bounded claim–citation audits. It validates blind case packets, immutable source
 snapshots, exact citation spans, case-bound human annotations, commitment and
 reveal records, hidden qualification scoring, signed Git evidence, and
 two-annotator agreement metrics.
 
 This repository does **not** contain the closed judge, production prompts or
 routing, private answer keys, raw pilot annotations, gold labels, holdout
-content, user documents, provider integrations, or secrets. It has no remote
-and is not approved for publication yet.
+content, user documents, provider integrations, or secrets. It is the only
+public Frontier Atlas repository; the product runtime, research mainline, and
+authority records remain private or offline.
+
+## Public-test status
+
+This is a public **test surface**, not a product release and not an open-source
+distribution. The current packets are blind, non-gold calibration candidates.
+They cannot grant a model, contributor, or release a passing status.
+
+- Inspect and run the verifier without network access or model API calls.
+- Report reproducible protocol, packet, documentation, or verifier defects.
+- Do not post hidden labels, private data, credentials, or vulnerability details.
+- Read [the participation rules](CONTRIBUTING.md), [security policy](SECURITY.md),
+  and [license notice](LICENSE) before participating.
 
 ## Authority boundary
 
@@ -86,6 +99,8 @@ partial protocol result.
 - [Human annotation guide](docs/ANNOTATION_GUIDE.md)
 - [Contributor workflow](docs/CONTRIBUTOR_WORKFLOW.md)
 - [Public/private boundary](PUBLIC_BOUNDARY.md)
+- [Public-test participation](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
 
 ## Local calibration packets
 

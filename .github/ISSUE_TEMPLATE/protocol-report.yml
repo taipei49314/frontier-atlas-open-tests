@@ -1,0 +1,80 @@
+name: Public test report
+description: Report a reproducible protocol, packet, verifier, or documentation defect.
+title: "[public-test] "
+labels:
+  - public-test
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not post credentials, personal data, hidden labels, sealed cases, or vulnerability details. Use private vulnerability reporting for security issues.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Protocol
+        - Packet
+        - Verifier or CLI
+        - Schema
+        - Documentation
+        - Cross-platform or offline reproducibility
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: Exact commit SHA tested.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Reproduction command and safe input
+      description: Provide the smallest reproducible command and non-sensitive input.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Python version, and packet ID if applicable.
+    validations:
+      required: true
+  - type: dropdown
+    id: external_calls
+    attributes:
+      label: Were network or model API calls used?
+      options:
+        - No
+        - Yes — described below
+    validations:
+      required: true
+  - type: textarea
+    id: external_details
+    attributes:
+      label: External-call details
+      description: If yes, identify what was called without exposing credentials or private data.
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Boundary confirmation
+      options:
+        - label: I removed credentials, personal data, hidden labels, sealed cases, and private repository content.
+          required: true
+        - label: This report does not claim gold, qualification, promotion, production-safety, or release authority.
+          required: true

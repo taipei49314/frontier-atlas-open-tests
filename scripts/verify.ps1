@@ -13,6 +13,12 @@ try {
 
     & py -3.11 -m atlas_test --json doctor
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+    $PacketManifests = Get-ChildItem -LiteralPath "packets" -Filter "packet.json" -File -Recurse
+    foreach ($PacketManifest in $PacketManifests) {
+        & py -3.11 -m atlas_test --json packet validate --packet $PacketManifest.FullName
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    }
 }
 finally {
     Pop-Location
