@@ -1,16 +1,16 @@
 # Frontier Atlas open test surface
 
-Public, offline protocol verifier and blind test surface for Frontier Atlas
-bounded claim–citation audits. It validates blind case packets, immutable source
-snapshots, exact citation spans, case-bound human annotations, commitment and
-reveal records, hidden qualification scoring, signed Git evidence, and
-two-annotator agreement metrics.
+This is the public exam paper for Frontier Atlas. It is not the product.
 
-This repository does **not** contain the closed judge, production prompts or
-routing, private answer keys, raw pilot annotations, gold labels, holdout
-content, user documents, provider integrations, or secrets. It is the only
-public Frontier Atlas repository; the product runtime, research mainline, and
-authority records remain private or offline.
+You can run the verifier offline and check that a test packet is internally
+consistent. You cannot get a passing score, see the answer key, or run the
+private judge from this repository.
+
+What it checks, in plain terms: a claim, the exact span it cites, a frozen
+source snapshot, and the commit/reveal records around a human annotation.
+
+The product runtime, prompts, gold labels, holdout set, and secrets stay
+private. This is the only public Frontier Atlas repository.
 
 ## Public-test status
 
